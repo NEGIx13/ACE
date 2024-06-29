@@ -1,0 +1,53 @@
+// Q1 CP # EASY
+// APPROACH 1 (brute force method)
+// USING C 
+#include <stdio.h>
+#include <math.h>
+#include <string.h>
+
+void printline();
+
+int main(){
+    int n ,target;
+    printf("enter the size of the array:- ");
+    scanf("%d", &n);
+    
+    int arr[n];
+    for(int i=0;i<n;i++){
+        printf("enter a number in the index  '%d' :-", i);
+        scanf("%d", &arr[i]);
+    }
+    
+    printline();
+    printf("enter array is :-\n [");
+    for(int j=0;j<n;j++){
+        printf(" %d", arr[j]);
+    }
+    
+    
+    printf(" ] \n");
+    printline();
+    printf(" enter the target number :- ");
+    scanf("%d", &target);
+    printline();
+    printf("the pairs are as follows:- \n");
+    for(int k=0;k<n;k++){
+        for(int l=k+1;l<n;l++){
+            if(arr[k] + arr[l] == target){
+                printf("(%d, %d), ", arr[k], arr[l]);
+            }
+            else{
+                continue;
+            }
+        }
+    }
+    
+    return 0;
+}
+
+void printline(){
+        for(int i=0;i<30;i++){
+            printf("-");
+        }
+        printf("\n");
+}

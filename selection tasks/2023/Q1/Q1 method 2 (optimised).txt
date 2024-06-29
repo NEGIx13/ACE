@@ -1,0 +1,28 @@
+// Q1 CP # EASY
+// APPROACH 2 (optimised method) [SHORT logic]
+// Time complexity = O(n.sq)
+// USING C 
+#include <stdio.h>
+
+int main(){
+    int n ,target;
+    scanf("%d", &n);
+    
+    int arr[n];
+    for(int i=0;i<n;i++){
+        printf("index '%d'= ", i);
+        scanf("%d", &arr[i]);
+    }
+    
+    scanf("%d", &target);
+    for(int k=0;k<n;k++){
+        for(int l=k+1;l<n;l++){
+            if(arr[k] + arr[l] == target){
+                printf("(%d, %d), ", arr[k], arr[l]);
+            }
+            else{
+                continue;
+            }
+        }
+    }
+    

@@ -1,0 +1,92 @@
+// This implementation works by dividing the input array into smaller and smaller halves until each half only has one element. 
+// It then combines these single-element arrays back together in sorted order. 
+// This is a recursive process, so the function calls itself on each half of the array until it reaches the base case of an array with only one element.
+
+// Q3 CP # MEDIUM
+// APPROACH 3 (using recursion)
+// faster than python apporoach (method 1)
+// USING C
+
+#include <stdio.h>
+
+// Function to merge two sorted halves of the array
+void merge(int arr[], int left[], int leftSize, int right[], int rightSize) {
+  int i = 0, j = 0, k = 0;
+
+  // Merge the two halves back together
+  while (i < leftSize && j < rightSize) {
+    if (left[i] < right[j]) {
+      arr[k] = left[i];
+      i++;
+    }
+    else {
+      arr[k] = right[j];
+      j++;
+    }
+    k++;
+  }
+
+  // If there are any remaining elements in the left half, add them to the result
+  while (i < leftSize) {
+    arr[k] = left[i];
+    i++;
+    k++;
+  }
+
+  // If there are any remaining elements in the right half, add them to the result
+  while (j < rightSize) {
+    arr[k] = right[j];
+    j++;
+    k++;
+  }
+}
+
+// Recursive function to sort an array using merge sort
+void merge_sort(int arr[], int size) {
+  if (size > 1) {
+    // Split the array in half
+    int mid = size / 2;
+    int left[mid];
+    int right[size - mid];
+
+    // Copy the left half of the array into the left half
+    for (int i = 0; i < mid; i++) {
+      left[i] = arr[i];
+    }
+
+    // Copy the right half of the array into the right half
+    for (int i = 0; i < size - mid; i++) {
+      right[i] = arr[mid + i];
+    }
+
+    // Recursively sort the two halves
+    merge_sort(left, mid);
+    merge_sort(right, size - mid);
+
+    // Merge the sorted halves back together
+    merge(arr, left, mid, right, size - mid);
+  }
+}
+
+int main() {
+  // Array of integers
+    int n;
+    scanf("%d", &n);
+    
+    int arr[n];
+    for(int i=0;i<n;i++){
+        printf("index '%d'= ", i);
+        scanf("%d", &arr[i]);
+    }
+    int size = sizeof(arr) / sizeof(arr[0]);
+
+    // Sorting the array using merge sort
+    merge_sort(arr, size);
+
+    // Printing the sorted array
+    for (int i = 0; i < size; i++) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+    return 0;
+}

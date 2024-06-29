@@ -1,0 +1,56 @@
+//Q2 ACE - arrangements (approach 1 optimised)
+#include <iostream>
+#include <bits/stdc++.h>
+#include <limits>
+
+using namespace std;
+
+bool increasing(int arr[], int size){
+    bool up = true;
+    for (int i = 1; i < size; i++) {
+        if (arr[i - 1] > arr[i]) {
+            up = false;
+        }
+    }
+    return up;
+}
+
+bool decreasing(int arr[], int size){
+    bool down = true;
+    for (int i = 1; i < size; i++) {
+        if (arr[i - 1] < arr[i]) {
+        down = false;
+        }
+    }
+    return down;
+}
+
+int main() {
+    int n;
+    cout << "enter size of array:- ";
+    cin >> n;
+    
+    int arr[n];
+    
+    for(int i=0;i<n;i++){
+        cout << "enter element no " << i+1 << ":- ";
+        cin >> arr[i];
+    }
+    cout << "array created !!!" << endl;
+
+    if(arr[0] < arr[1]){
+        if(increasing(arr, n)){
+            cout << "yes" << endl;
+            return 0;
+        }
+    }
+    else{
+        if(decreasing(arr, n)){
+            cout << "yes"<< endl;
+            return 0;
+        }
+    }
+    
+    cout << "no";
+    return 0;
+}

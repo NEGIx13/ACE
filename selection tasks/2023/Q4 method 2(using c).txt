@@ -1,0 +1,58 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <limits.h>
+
+// Function to check if a particular position in the maze is a valid move
+bool isValidMove(int maze[][4], int row, int col)
+{
+    return (row >= 0 && row < 4 && col >= 0 && col < 4 && maze[row][col] == 1);
+}
+
+// Recursive function to find the shortest path through the maze
+int findShortestPath(int maze[][4], int row, int col, int distance)
+{
+    // Return the distance if we've reached the end
+    if (row == 3 && col == 3)
+        return distance;
+
+    // Mark the current position as visited
+    maze[row][col] = 0;
+
+    // Initialize the minimum distance
+    int min_distance = INT_MAX;
+
+    // Explore the current node's neighbors
+    if (isValidMove(maze, row + 1, col))
+        min_distance = min(min_distance, findShortestPath(maze, row + 1, col, distance + 1));
+    if (isValidMove(maze, row, col + 1))
+        min_distance = min(min_distance, findShortestPath(maze, row, col + 1, distance + 1));
+    if (isValidMove(maze, row - 1, col))
+        min_distance = min(min_distance, findShortestPath(maze, row - 1, col, distance + 1));
+    if (isValidMove(maze, row, col - 1))
+        min_distance = min(min_distance, findShortestPath(maze, row, col - 1, distance + 1));
+
+    // Mark the current position as unvisited
+    maze[row][col] = 1;
+
+    return min_distance;
+}
+
+int main()
+{
+    // Initialize the maze
+    int maze[4][4] = { { 1, 1, 1, 1 },
+                       { 0, 0, 1, 1 },
+                       { 1, 1, 1, 1 },
+                       { 1, 1, 1, 1 } };
+
+    int shortest_path = findShortestPath(maze, 0, 0, 0);
+
+    // Print the result
+    if (shortest_path == INT_MAX)
+        printf("No path was found.\n");
+    else
+        printf("Shortest path: %d\n", shortest_path);
+
+    return 0;
+}

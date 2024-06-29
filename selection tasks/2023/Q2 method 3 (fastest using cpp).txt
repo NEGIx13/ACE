@@ -1,0 +1,50 @@
+// This solution is similar to the C solution, but it uses the INT_MIN constant from the climits library to initialize max1 and max2 to the 
+// minimum possible integer value. 
+// It then iterates through the list and updates max1 and max2 as necessary.
+
+// This solution has a time complexity of O(n), since it only needs to iterate through the list once. 
+// It has a space complexity of O(1), since it only uses a constant amount of memory to store the maximum and second maximum values.
+
+// Q2 CP # EASY
+// APPROACH 3 (optimised method)
+// time complexity o(1) [fastest metho, i believe]
+// USING C++
+
+
+#include <iostream>
+#include <climits>
+
+using namespace std;
+
+int main() {
+    // Array of integers
+    int n;
+    cout << "size of the array:- ";
+    cin >> n;
+    int arr[n]; 
+    for(int i=0;i<n;i++){
+        cout << "element no " << i+1 << " = ";
+        cin >> arr[i];
+    }
+
+    // Set the initial maximum and second maximum values to the minimum possible integer value
+    int max1 = INT_MIN;
+    int max2 = INT_MIN;
+
+    // Iterate through the list
+    for (int i = 0; i < 5; i++) {
+        // If the current number is greater than the current maximum, update the maximum and second maximum values
+        if (arr[i] > max1) {
+            max2 = max1;
+            max1 = arr[i];
+        }
+        // If the current number is less than the current maximum but greater than the current second maximum, update the second maximum value
+        else if (arr[i] > max2) {
+            max2 = arr[i];
+        }
+    }
+
+    cout << max2 << endl;
+
+    return 0;
+}

@@ -1,0 +1,43 @@
+from collections import deque
+
+def find_shortest_path(maze):
+    # Check if the maze is valid
+    if not maze or not maze[0]:
+        return None
+
+    # Initialize the starting position
+    start = (0, 0)
+    end = (len(maze) - 1, len(maze[0]) - 1)
+
+    # Initialize the queue and visited set
+    queue = deque([start])
+    visited = set(start)
+
+    # Initialize the direction vectors
+    dirs = [(1, 0), (0, 1), (-1, 0), (0, -1)]
+
+    # Initialize the distance map
+    distance = {start: 0}
+
+    # Perform the search
+    while queue:
+        curr_row, curr_col = queue.popleft()
+
+        # Check if we've reached the end
+        if (curr_row, curr_col) == end:
+            return distance[(curr_row, curr_col)]
+
+        # Explore the current node's neighbors
+        for dir in dirs:
+            next_row, next_col = curr_row + dir[0], curr_col + dir[1]
+            if (next_row, next_col) not in visited and is_valid_move(maze, next_row, next_col):
+                visited.add((next_row, next_col))
+                queue.append((next_row, next_col))
+                distance[(next_row, next_col)] = distance[(curr_row, curr_col)] + 1
+
+    # Return None if no path was found
+    return None
+
+def is_valid_move(maze, row, col):
+    return 0 <= row < len(maze) and 0 <= col < len(maze[0]) and maze[row][col] == 1
+

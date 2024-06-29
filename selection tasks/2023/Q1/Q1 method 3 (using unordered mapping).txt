@@ -1,0 +1,55 @@
+// Q1 CP # EASY
+// APPROACH 3 (optimised method) [using unordered mapping]
+// Time complexity = O(n)
+// Fastest apporach (i believe) [time complx.. wise]
+// USING C++
+
+#include <iostream>
+#include <unordered_map>
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main() {
+    int n, target;
+    cout << "enter the size of the array:- ";
+    cin >> n;
+    // Array of integers
+    int numbers[n];
+    for(int i=0;i<n;i++){
+        cout << "enter the element to be added in the array:- ";
+        cin >> numbers[i];
+    }
+
+    // Target sum
+    cout << "target sum:- ";
+    cin >> target;
+
+    // Create a unordered map to store the pairs we find
+    unordered_map<int, int> pairs;
+
+    // Iterate through the numbers
+    for (int i = 0; i < 5; i++) {
+        // Calculate the second number needed to reach the target sum
+        int num2 = target - numbers[i];
+
+        // If num2 is in the map, add the pair to the map
+        if (pairs.count(num2)) {
+            pairs[numbers[i]] = num2;
+        }
+
+        // Otherwise, add the current number to the map
+        else {
+            pairs[numbers[i]] = 0;
+        }
+    }
+
+    // Iterate through the map and print out the pairs
+    for (const auto& pair : pairs) {
+        if (pair.second != 0) {
+            cout << "(" << pair.first << ", " << pair.second << ") ," ;
+        }
+    }
+
+    return 0;
+}
