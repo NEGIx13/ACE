@@ -1,5 +1,16 @@
 # ACE Selection Task README
 
+## Table of Contents
+1. [Introduction](#introduction)
+2. [Task Description](#task-description)
+3. [Input Format](#input-format)
+4. [Output Format](#output-format)
+5. [Evaluation Criteria](#evaluation-criteria)
+6. [Setup Instructions](#setup-instructions)
+7. [Execution Instructions](#execution-instructions)
+8. [Examples](#examples)
+9. [Troubleshooting](#troubleshooting)
+
 ## Introduction
 The ACE (Association of Computer Enthusiasts) club organizes various activities and tasks to engage its members and promote learning and collaboration in the field of computer science. This README provides detailed instructions on how to understand, set up, and execute the ACE selection task.
 
@@ -95,4 +106,3 @@ Refer to the [Input Format](#input-format) and [Output Format](#output-format) s
   - **Solution:** Ensure the selection logic correctly implements the criteria specified in the input.
 - **Issue:** Script errors.
   - **Solution:** Check for syntax errors or missing dependencies. Ensure all required libraries are installed.
-
