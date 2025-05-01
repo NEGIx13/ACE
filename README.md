@@ -1,4 +1,42 @@
-# ACE Selection Task README
+import numpy as np
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import SimpleRNN, Dense
+from tensorflow.keras.optimizers import Adam
+
+# Create sequence data: input sequences of 3 steps, output is the next number
+def create_dataset(seq_length=3, total_samples=1000):
+    X = []
+    y = []
+    for i in range(total_samples):
+        start = np.random.randint(0, 100)
+        seq = [start + j for j in range(seq_length + 1)]
+        X.append(seq[:-1])
+        y.append(seq[-1])
+    X = np.array(X)
+    y = np.array(y)
+    return X, y
+
+# Prepare the data
+X, y = create_dataset()
+X = X.reshape((X.shape[0], X.shape[1], 1))  # reshape to [samples, timesteps, features]
+
+# Define RNN model
+model = Sequential([
+    SimpleRNN(50, activation='relu', input_shape=(X.shape[1], 1)),
+    Dense(1)
+])
+
+# Compile and train
+model.compile(optimizer=Adam(), loss='mse')
+model.fit(X, y, epochs=20, batch_size=32)
+
+# Test prediction
+test_input = np.array([[100, 101, 102]])
+test_input = test_input.reshape((1, 3, 1))
+predicted = model.predict(test_input, verbose=0)
+print(f"Predicted next number after [100, 101, 102]: {predicted[0][0]:.2f}")
+
+
 
 ## Table of Contents
 1. [Introduction](#introduction)
